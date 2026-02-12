@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import beersJSON from "./../assets/beers.json";
 
@@ -16,7 +16,23 @@ function RandomBeersPage() {
   // 1. Set up an effect hook to make a request for a random beer from the Beers API.
   // 2. Use axios to make a HTTP request.
   // 3. Use the response data from the Beers API to update the state variable.
+   useEffect(()=>{
+    getRandomBeer()
+  },[])
 
+  // TASKS:
+  // 1. Set up an effect hook to make a request to the Beers API and get a list with all the beers.
+  // 2. Use axios to make a HTTP request.
+  // 3. Use the response data from the Beers API to update the state variable.
+
+  const getRandomBeer=async()=>{
+    const response= await axios.get("https://beers-api.edu.ironhack.com/beers/random")
+    console.log(response.data)
+    setRandomBeer(response.data)
+  }
+  if(randomBeer===null){
+    return <h3>Laoding ...</h3>
+  }
 
 
   // The logic and the structure for the page showing the random beer. You can leave this as it is.
